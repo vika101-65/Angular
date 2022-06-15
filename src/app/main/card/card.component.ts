@@ -13,14 +13,15 @@ export class CardComponent implements OnChanges{
   
   urlImage = '';
   label = '';
+  idRecipe = '';
   
   ngOnChanges(changes: SimpleChanges): void {
     this.urlImage = this.recipe.recipe?.images.REGULAR.url;
     this.label = this.recipe.recipe?.label;
+    this.idRecipe = this.getIdRecipe(this.recipe.recipe?.uri);
   }
     
-  ng(): void {
-    console.log(this.recipe.recipe.images.REGULAR.url);
+  getIdRecipe (uri: string): string {
+     return uri.split('_')[1];
   }
- 
 }

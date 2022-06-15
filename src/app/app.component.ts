@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ang2';
-  haederText = 'Создание директивы'
+  haederText = 'Big recipe book'
 }
