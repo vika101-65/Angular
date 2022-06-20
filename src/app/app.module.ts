@@ -9,7 +9,8 @@ import { RecipeSaerchComponent } from './main/recipe-saerch/recipe-saerch.compon
 import { CardComponent } from './main/card/card.component';
 import { RecipeDescriptionCardComponent } from './main/recipe-description-card/recipe-description-card.component';
 import { ListOfRecipesComponent } from './main/list-of-recipes/list-of-recipes.component';
-
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { ListOfRecipesComponent } from './main/list-of-recipes/list-of-recipes.c
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(reducers)
   ],
   providers: [],
   bootstrap: [AppComponent],
