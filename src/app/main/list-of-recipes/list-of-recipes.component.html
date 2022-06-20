@@ -1,0 +1,5 @@
+<div *ngIf="listOfRecipes.length !== 0">
+  <div class="row">
+    <app-card class="col-sm-4" *ngFor="let recipe of listOfRecipes" [recipe]="recipe"></app-card>
+  </div>
+</div>

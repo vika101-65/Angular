@@ -1,12 +1,13 @@
 <div class="container">
   <div class="d-flex" role="search">
-    <input class="form-control me-2" type="search" placeholder="Recipe Search" aria-label="Search" [(ngModel)]="query">
+    <input class="form-control me-2" type="search" placeholder="Enter the name of the dish or ingredient" aria-label="Search" [(ngModel)]="query">
     <button class="btn btn-outline-success"(click)="onSearchRecipe()">Search</button>
   </div>
 </div>
-<div *ngIf="listOfRecipes.length !== 0">
+
+<!-- <div *ngIf="listOfRecipes.length !== 0">
   <div class="row">
     <app-card class="col-sm-4" *ngFor="let recipe of listOfRecipes" [recipe]="recipe"></app-card>
   </div>
-</div>
+</div> -->
 

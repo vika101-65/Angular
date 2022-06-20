@@ -1,7 +1,5 @@
 .container {
-  background: url(../../assets/food.jpg);
-  height: 500px;
-  width: 640px;
-  background-repeat: no-repeat;
-  background-position: center;
+
+  max-width: 640px;
+
 }
