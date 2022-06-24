@@ -10,7 +10,13 @@ import { CardComponent } from './main/card/card.component';
 import { RecipeDescriptionCardComponent } from './main/recipe-description-card/recipe-description-card.component';
 import { ListOfRecipesComponent } from './main/list-of-recipes/list-of-recipes.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { resReduce } from './store/reduces/store.reduces';
+import { ResEffect } from './store/effects/store.effects';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +31,12 @@ import { reducers } from './store';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot({ct:resReduce}),
+    StoreDevtoolsModule.instrument({
+      maxAge:25,
+      logOnly:environment.production,
+    }),
+    EffectsModule.forRoot([ResEffect])
   ],
   providers: [],
   bootstrap: [AppComponent],

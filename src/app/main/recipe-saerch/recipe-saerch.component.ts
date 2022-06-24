@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ApiService } from 'src/app/servise/api-sevice';
+import { getRecipsAction } from 'src/app/store/action/store.action';
 @Component({
   selector: 'app-recipe-saerch',
   templateUrl: './recipe-saerch.component.html',
@@ -8,19 +10,12 @@ import { ApiService } from 'src/app/servise/api-sevice';
 })
 export class RecipeSaerchComponent {
 
-  constructor (private apiService: ApiService) {}
+  constructor (private apiService: ApiService, private store: Store) {}
  
   query = '';
-  listOfRecipes = [];
-
-  onSearchRecipe () {
-   this.apiService.onSearchRecipe(this.query)
-   .subscribe((data:any) => { console.log('data', data);
-      this.listOfRecipes = data.hits;
-      console.log(this.listOfRecipes);
-     });
-
-     this.query = ''; 
-  };
+ 
+  onSearchRecipe() {
+    this.store.dispatch( getRecipsAction({ingridient: this.query}))
+  }
   
 }

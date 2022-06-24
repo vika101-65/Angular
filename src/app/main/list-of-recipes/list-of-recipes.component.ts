@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectListRecipes, selectStatusRecipes } from 'src/app/store/selector/store.selector';
 
 @Component({
   selector: 'app-list-of-recipes',
@@ -7,11 +9,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ListOfRecipesComponent implements OnInit {
 
-  @Input() listOfRecipes = [];
+  listOfRecipes$ = this.store.select(selectListRecipes);
+  statusRecipes = this.store.select(selectStatusRecipes);
+  recipes = [];
 
-  constructor() { }
+  constructor(private store: Store) { };
 
   ngOnInit(): void {
+   this.listOfRecipes$.subscribe(state =>{
+      this.recipes = state;
+      console.log('tttttt', this.recipes)}
+    )
   }
 
 }

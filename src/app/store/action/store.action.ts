@@ -1,13 +1,7 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from "@ngrx/store";
 
-export enum RecipeAction {
-  GetRecipes = '[Recipes] GetRecipes'
-}
-
-export class GetRecipes implements Action {
-  readonly type = RecipeAction.GetRecipes;
-
-  constructor (private payload: { ingridient:string }) {};
-}
-
-export type RecipeUnion = GetRecipes;
+export const getRecipsAction = createAction('get recips', 
+  props<{ingridient:string}>()
+);
+export const successGetRecipsAction = createAction('success', props<{recipes:{}}>());
+export const errorAction = createAction('error');
