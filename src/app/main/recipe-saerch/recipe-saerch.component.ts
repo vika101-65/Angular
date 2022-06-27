@@ -15,7 +15,8 @@ export class RecipeSaerchComponent {
   query = '';
  
   onSearchRecipe() {
-    this.store.dispatch( getRecipsAction({ingridient: this.query}))
+    this.store.dispatch( getRecipsAction({ingridient: this.query}));
+    this.query = '';
   }
   
 }

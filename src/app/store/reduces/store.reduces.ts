@@ -12,15 +12,13 @@ export const initialState: Res ={
 
 export const resReduce = createReducer(
   initialState,
-  on(getRecipsAction, (state) => 
-    {console.log('state',state)
+  on(getRecipsAction, (state) => {
       return {
         ...state,
         status: 'pending'
       }
     }),
   on(successGetRecipsAction, (state, {recipes}:any)=> {
-    console.log('state++++',state); console.log('recipes',recipes);
     return {
       ...state,
       recipes: recipes['hits'],
@@ -28,7 +26,6 @@ export const resReduce = createReducer(
     }
   }),
   on(errorAction, (state) => {
-    console.log('error reduce')
     return {
       ...state,
       status: 'error'
