@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { ApiService } from 'src/app/servise/api-sevice';
+import { getDescriptionRecipeAction } from 'src/app/store/action/store.action';
+import { selectDescriptionReciper } from 'src/app/store/selector/store.selector';
 
 @Component({
   selector: 'app-recipe-description-card',
@@ -13,22 +16,24 @@ import { ApiService } from 'src/app/servise/api-sevice';
 export class RecipeDescriptionCardComponent implements OnInit {
 
   id! : string;
-  recipe: any;
-  t = 'dddd';
+  recipe! :any ;
+  checkRecipe: boolean = false;
+ 
+  constructor (private router: ActivatedRoute, private apiServise: ApiService, private store: Store) { }
 
-  constructor (private router: ActivatedRoute, private apiServise: ApiService, private http: HttpClient) { }
-
-  person!: Observable<any> ;
-
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.router.params.subscribe((params: Params) => {
-      this.id = params['id']; console.log('id', this.id);
+      this.id = params['id'];
     
-      this.apiServise.getDescriptionRecipe(this.id)
-      .subscribe((data) => {
-        this.recipe = data;
-        console.log('===>', this.recipe);
-      })
+      this.store.dispatch(getDescriptionRecipeAction({idRecipe: this.id}));  
+
+      this.store.select(selectDescriptionReciper).subscribe((recipe) => {
+        this.recipe = recipe;
+        
+        if(this.recipe?.recipe) {
+          this.checkRecipe = true;
+        };
+      });
     })
   }
 }

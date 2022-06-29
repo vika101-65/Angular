@@ -23,9 +23,9 @@ export class ListOfRecipesComponent implements OnInit {
       console.log('subscribe?', state);
       this.recipes = state.recipes;
       this.statusLoading = state.status;
-      console.log('status', this.status);
+      
       if (state.status === 'resolved') {
-        this.status = true; console.log('status', this.status);
+        this.status = true;
       };
     })
   }

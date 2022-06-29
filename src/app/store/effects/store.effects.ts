@@ -5,7 +5,7 @@ import {catchError, delay, map, switchMap} from 'rxjs/operators';
 // import { from, mergeMap, switchMap, catchError } from "rxjs";
 import { ApiService } from "src/app/servise/api-sevice";
 // import { map } from 'rxjs/operators';
-import { errorAction, successGetRecipsAction } from '../action/store.action';
+import { errorAction, successGetDesRecipeAction, successGetRecipsAction } from '../action/store.action';
 
 @Injectable()
 export class ResEffect {
@@ -21,19 +21,33 @@ export class ResEffect {
       ofType('get recips'),
 
       switchMap(({ingridient}) =>{
-        console.log('ingridient', ingridient)
+        
         return  this.apiService.onSearchRecipe(ingridient).pipe(
           map((todo:any) => {
-            console.log('r', todo);
+            
             return successGetRecipsAction({recipes:todo})
           }),
           catchError(() => {
             console.log('erro')
             return [errorAction()]})
         )
-          })      
+      })      
     )
-  })
-        
-  
+  });
+
+  loadDescription$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType('get description'),
+
+      switchMap(({idRecipe}) => {
+
+        return this.apiService.getDescriptionRecipe(idRecipe).pipe(
+          map((recipe:any) => {
+            return successGetDesRecipeAction({payload: recipe})
+          })
+        )
+      })
+    )
+  });
+ 
 }

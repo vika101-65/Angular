@@ -7,7 +7,7 @@ import { RecipeDescriptionCardComponent } from './main/recipe-description-card/r
 const routes: Routes = [
   { path: ' ', component: HeaderComponent},
   { path: 'recipes', component: ListOfRecipesComponent},
-  { path: 'recipe/:id', component: RecipeDescriptionCardComponent },
+  { path: 'recipes/:id', component: RecipeDescriptionCardComponent },
   // { path: 'vika', component: VikaComponent }
   // { path: '**', redirectTo: '/'}
 ];

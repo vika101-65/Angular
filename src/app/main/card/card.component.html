@@ -3,7 +3,9 @@
     <img src={{urlImage}} class="card-img-top" alt={{label}}>
     <div class="card-body">
       <h5 class="card-title">{{label}}</h5>
-      <a [routerLink]="[idRecipe]" class="btn btn-primary">Description</a>
+      <a [routerLink]="[idRecipe]" >
+        <button type="button" class="btn btn-warning">Description</button>
+      </a>
     </div>
   </div>
 </div>

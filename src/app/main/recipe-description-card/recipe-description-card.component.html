@@ -1,4 +1,4 @@
-<div class="col d-flex justify-content-center card" *ngIf="recipe" style="width: 18rem;">
+<div class="col d-flex justify-content-center card" *ngIf="checkRecipe" style="width: 18rem;">
   <img src={{recipe.recipe.image}} class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{recipe.recipe.label}}</h5>
@@ -8,4 +8,3 @@
     <li class="list-group-item">{{food}}</li>
   </ul>
 </div>  
-
