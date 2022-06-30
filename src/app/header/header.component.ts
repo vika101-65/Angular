@@ -14,8 +14,4 @@ export class HeaderComponent implements OnInit{
   ngOnInit(): void {
     
   }
-
-  n () {
-   console.log( this.photos$.subscribe(y => console.log('y',y)))
-  }
 }

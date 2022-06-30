@@ -20,7 +20,6 @@ export class ListOfRecipesComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(selectRecipes).subscribe((state:any) => {
-      console.log('subscribe?', state);
       this.recipes = state.recipes;
       this.statusLoading = state.status;
       

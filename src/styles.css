@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Dancing Script';
+  src: url(assets/fonts/DancingScript-VariableFont_wght.ttf)format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Arima';
+  src: url(assets/fonts/Arima-VariableFont_wght.ttf) format("truetype");
+ 
+  font-weight: 700;
+}
+
+body {
+  font-family: 'Arima', cursive;
+}
