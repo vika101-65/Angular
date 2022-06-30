@@ -13,7 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
-import { resReduce } from './store/reduces/store.reduces';
+import { metaReducers, reducers } from './store/reduces/store.reduces';
 import { ResEffect } from './store/effects/store.effects';
 
 
@@ -31,7 +31,7 @@ import { ResEffect } from './store/effects/store.effects';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ct:resReduce}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge:25,
       logOnly:environment.production,

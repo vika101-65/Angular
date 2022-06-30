@@ -1,4 +1,4 @@
-import { createReducer, on } from "@ngrx/store";
+import { createReducer, on, ActionReducer, MetaReducer } from "@ngrx/store";
 import { errorAction, getDescriptionRecipeAction, getRecipsAction, successGetDesRecipeAction, successGetRecipsAction } from "../action/store.action";
 
 export interface Res {
@@ -33,7 +33,11 @@ export const resReduce = createReducer(
       ...state,
       status: 'error'
     }
-  }),
+  })
+);
+
+export const decReduce = createReducer(
+  initialState,
 
   on(getDescriptionRecipeAction, (state) => {
     return {
@@ -53,3 +57,19 @@ export const resReduce = createReducer(
   })
 
 );
+
+export const reducers = {
+  ct: resReduce,
+  decReduce
+}
+
+export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
+  return (state, action) => {
+    console.log('state', state);
+    console.log('action', action);
+
+    return reducer(state, action);
+  };
+};
+
+export const metaReducers: MetaReducer<any>[] = [debug];
