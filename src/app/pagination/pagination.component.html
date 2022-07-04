@@ -1,0 +1,15 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a *ngIf="arrHref.length !== 1" class="page-link" on-click="onGetPreviousPageRecipes()" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li *ngFor="let item of arrHref"  on-click="onGetAnyPage(item.url)" class="page-item" [class.active]="item.page === number? true: false" ><a class="page-link">{{item.page}}</a></li>
+    <li class="page-item">
+      <a class="page-link" aria-label="Next" on-click="onGetNextPegeRecipes()">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -1,9 +1,10 @@
 import { createReducer, on, ActionReducer, MetaReducer, ActionReducerMap } from "@ngrx/store";
-import { errorAction, getDescriptionRecipeAction, getRecipsAction, successGetDesRecipeAction, successGetRecipsAction } from "../action/store.action";
+import { errorAction, getDescriptionRecipeAction, getNextRecipesAction, getRecipsAction, successGetDesRecipeAction, successGetRecipsAction } from "../action/store.action";
 
 export interface Res {
   recipes?: [],
   status?: string,
+  link?: string
 };
 
 export const initialState: Res ={
@@ -24,7 +25,8 @@ export const resReduce = createReducer(
     return {
       ...state,
       recipes: recipes['hits'],
-      status: 'resolved'
+      status: 'resolved',
+      link: recipes['_links'].next.href
     }
   }),
   
@@ -32,6 +34,13 @@ export const resReduce = createReducer(
     return {
       ...state,
       status: 'error'
+    }
+  }),
+
+  on(getNextRecipesAction, (state) => {
+    return {
+      ...state,
+      status: 'pending'
     }
   })
 );

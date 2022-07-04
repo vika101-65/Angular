@@ -1,0 +1,10 @@
+.app-card {
+  padding: 0;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 2%;
+}
+
+.pagination {
+  justify-content: center;
+}

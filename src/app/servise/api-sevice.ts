@@ -20,5 +20,9 @@ export class ApiService {
 
    getCheese() {
     return  this.http.get(`https://api.edamam.com/api/recipes/v2?type=public&q=cheese&app_id=${this.app_id}&app_key=${this.app_key}`)
+  };
+
+  getNextRecipe(url:string): Observable<Object> {
+    return this.http.get(url)
   }
 }

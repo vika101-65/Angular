@@ -9,6 +9,6 @@
 </div>
 
 <div *ngIf="status" class="row">
-  <app-card class="col-sm-3" *ngFor="let recipe of recipes" [recipe]="recipe"></app-card>
-  <p>sfsf</p>
+  <app-card class="col-sm-3 app-card" *ngFor="let recipe of recipes" [recipe]="recipe"></app-card>
+  <app-pagination class="pagination"></app-pagination>
 </div>

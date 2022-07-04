@@ -8,3 +8,5 @@ export const errorAction = createAction('error');
 
 export const getDescriptionRecipeAction = createAction('get description', props<{idRecipe: string}>());
 export const successGetDesRecipeAction = createAction('success recipe', props<{payload: {}}>());
+
+export const getNextRecipesAction = createAction('get next recips', props<{url:string}>());

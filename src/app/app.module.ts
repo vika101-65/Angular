@@ -15,6 +15,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { metaReducers, reducers } from './store/reduces/store.reduces';
 import { ResEffect } from './store/effects/store.effects';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ResEffect } from './store/effects/store.effects';
     CardComponent,
     RecipeDescriptionCardComponent,
     ListOfRecipesComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

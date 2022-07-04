@@ -49,5 +49,23 @@ export class ResEffect {
       })
     )
   });
+
+  loadNextRecipes$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType('get next recips'),
+
+      switchMap(({url}) => {
+        return this.apiService.getNextRecipe(url).pipe(
+          map((todo:any) => {
+            
+            return successGetRecipsAction({recipes:todo})
+          }),
+          catchError(() => {
+            console.log('erro')
+            return [errorAction()]})
+        )
+      })
+    )
+  })
  
 }

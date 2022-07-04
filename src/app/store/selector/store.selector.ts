@@ -10,3 +10,5 @@ export const selectStatusRecipes = createSelector(selectRecipes, (state:any) => 
 export const selectDescription = createFeatureSelector( 'decReduce');
 export const selectDescriptionReciper = createSelector(selectDescription , (state:any) => state.descripRecip.payload);
 
+export const selectNextRecipes = createSelector(selectRecipes, (state:any) => state.link);
+
