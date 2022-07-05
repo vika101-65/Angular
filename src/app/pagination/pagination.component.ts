@@ -19,25 +19,31 @@ export class PaginationComponent implements OnInit {
   nextHref = '';
   number = 1;
   arrHref : urlArr[]= [{page: this.number, url: '', activItem: true}];
-  prevHref = '';
+  prevArrHref: urlArr[] = [];
+  startHref = '';
   indexActiveItem = 0;
 
 
   constructor(private store:Store) { };
 
   ngOnInit(): void {
-    this.store.select(selectNextRecipes).subscribe((state) => this.nextHref = state)
+    this.store.select(selectNextRecipes).subscribe((state) => {
+
+      if(this.startHref.length === 0) {
+        this.startHref = state;
+      }
+      return this.nextHref = state;
+    })
   };
 
   changeActiveItem (index: number, switchItem: boolean) : urlArr {
-    return this.arrHref[this.indexActiveItem] = {
-      ...this.arrHref[this.indexActiveItem],
+    return this.arrHref[index] = {
+      ...this.arrHref[index],
       activItem: switchItem
       };
   };
 
   onGetNextPegeRecipes () {
-    this.prevHref = this.nextHref;
     this.store.dispatch(getNextRecipesAction({url: this.nextHref}));
     
     if(this.indexActiveItem === this.arrHref.length - 1) {
@@ -46,26 +52,44 @@ export class PaginationComponent implements OnInit {
         ...this.arrHref[this.indexActiveItem],
         activItem: false
       };
-      console.log('this.arrHref1',this.arrHref)
+
+      this.indexActiveItem < 4 ? this.indexActiveItem += 1 : this.indexActiveItem; 
       this.arrHref.push({page:this.number, url: this.nextHref, activItem: true});
 
       if (this.arrHref.length > 5) {
-        this.arrHref.shift();
-      }; console.log('this.arrHref',this.arrHref)
+        const deletItem: urlArr | undefined= this.arrHref.shift(); 
+        
+        if (deletItem) {
+          this.prevArrHref.push(deletItem);
+        };
+      }; 
     } else {
       this.changeActiveItem(this.indexActiveItem, false);
-      this.indexActiveItem += 1;
+      this.indexActiveItem < 4 ? this.indexActiveItem += 1 : this.indexActiveItem; 
       this.changeActiveItem(this.indexActiveItem, true);
     }; 
+    console.log('++++++',  this.indexActiveItem)
   };
 
   onGetPreviousPageRecipes () {
-    this.store.dispatch(getNextRecipesAction({url: this.prevHref}));
-    
-    if (this.number >= 5) {
+    if ( (0 < this.indexActiveItem) && (this.indexActiveItem < 5)) {
+      this.changeActiveItem(this.indexActiveItem, false);
+      this.indexActiveItem -= 1;
+      this.store.dispatch(getNextRecipesAction({url: this.arrHref[this.indexActiveItem].url}));
+      this.changeActiveItem(this.indexActiveItem, true);
+    };
+
+    if(this.indexActiveItem === 0 && this.number > 5) {
       this.arrHref.pop();
-      this.number -= 1;
-    }; 
+      const prevItem: urlArr | undefined = this.prevArrHref.pop();
+
+      if (prevItem) {
+        this.arrHref.unshift(prevItem)
+      };
+      this.store.dispatch(getNextRecipesAction({url: this.arrHref[this.indexActiveItem].url}));
+    };
+
+    console.log('===========', this.indexActiveItem)
   };
 
   onGetAnyPage(item:urlArr, i: number) {
