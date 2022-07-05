@@ -5,7 +5,8 @@ import { selectNextRecipes } from '../store/selector/store.selector';
 
 export interface urlArr {
   page: number,
-  url: string
+  url: string,
+  activItem: boolean
 }
 
 @Component({
@@ -17,8 +18,9 @@ export class PaginationComponent implements OnInit {
 
   nextHref = '';
   number = 1;
-  arrHref : urlArr[]= [{page: this.number, url: ''}];
+  arrHref : urlArr[]= [{page: this.number, url: '', activItem: true}];
   prevHref = '';
+  indexActiveItem = 0;
 
 
   constructor(private store:Store) { };
@@ -27,11 +29,34 @@ export class PaginationComponent implements OnInit {
     this.store.select(selectNextRecipes).subscribe((state) => this.nextHref = state)
   };
 
+  changeActiveItem (index: number, switchItem: boolean) : urlArr {
+    return this.arrHref[this.indexActiveItem] = {
+      ...this.arrHref[this.indexActiveItem],
+      activItem: switchItem
+      };
+  };
+
   onGetNextPegeRecipes () {
     this.prevHref = this.nextHref;
     this.store.dispatch(getNextRecipesAction({url: this.nextHref}));
-    this.number += 1;
-    this.arrHref.push({page:this.number, url: this.nextHref});
+    
+    if(this.indexActiveItem === this.arrHref.length - 1) {
+      this.number += 1;
+      this.arrHref[this.indexActiveItem] = {
+        ...this.arrHref[this.indexActiveItem],
+        activItem: false
+      };
+      console.log('this.arrHref1',this.arrHref)
+      this.arrHref.push({page:this.number, url: this.nextHref, activItem: true});
+
+      if (this.arrHref.length > 5) {
+        this.arrHref.shift();
+      }; console.log('this.arrHref',this.arrHref)
+    } else {
+      this.changeActiveItem(this.indexActiveItem, false);
+      this.indexActiveItem += 1;
+      this.changeActiveItem(this.indexActiveItem, true);
+    }; 
   };
 
   onGetPreviousPageRecipes () {
@@ -43,8 +68,24 @@ export class PaginationComponent implements OnInit {
     }; 
   };
 
-  onGetAnyPage(url:string) {
-    this.store.dispatch(getNextRecipesAction({url: url}));
-  }
+  onGetAnyPage(item:urlArr, i: number) {
+    this.store.dispatch(getNextRecipesAction({url: item.url}));
+    this.indexActiveItem = i; 
+
+    this.arrHref = this.arrHref.map((value: urlArr, index: number) => {
+
+      if (index === this.indexActiveItem) {
+        return {
+          ... value,
+          activItem: true
+        }
+      };
+      return {
+        ... value,
+        activItem: false
+      }
+    });
+
+  };
 
 }
