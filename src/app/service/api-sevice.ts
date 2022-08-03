@@ -25,4 +25,11 @@ export class ApiService {
   getNextRecipe(url:string): Observable<Object> {
     return this.http.get(url)
   }
+
+  url: string = 'http://localhost:5000/api/user';
+
+  createUser(body: any) {
+    this.http.post(this.url, body);
+    console.log(body)
+  }
 }

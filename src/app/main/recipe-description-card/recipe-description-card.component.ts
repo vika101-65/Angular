@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { ApiService } from 'src/app/servise/api-sevice';
+import { ApiService } from 'src/app/service/api-sevice';
 import { getDescriptionRecipeAction } from 'src/app/store/action/store.action';
 import { selectDescriptionReciper } from 'src/app/store/selector/store.selector';
 

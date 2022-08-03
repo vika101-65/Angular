@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ApiService } from 'src/app/servise/api-sevice';
+import { ApiService } from 'src/app/service/api-sevice';
 import { getRecipsAction } from 'src/app/store/action/store.action';
 @Component({
   selector: 'app-recipe-saerch',

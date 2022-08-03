@@ -1,0 +1,11 @@
+<h3>Form!</h3>
+
+<form (ngSubmit)="save(form)" #form="ngForm">
+  <label>Your name</label>
+  <input name="name" ngModel>
+
+  <label>Your mail</label>
+  <input name="mail" ngModel>
+
+  <button type="submit"> Save</button>
+</form>

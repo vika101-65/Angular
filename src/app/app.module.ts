@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { metaReducers, reducers } from './store/reduces/store.reduces';
 import { ResEffect } from './store/effects/store.effects';
 import { PaginationComponent } from './pagination/pagination.component';
+import { FormLogin } from './shear/formLogin/formLogin.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     RecipeDescriptionCardComponent,
     ListOfRecipesComponent,
     PaginationComponent,
+    FormLogin,
   ],
   imports: [
     BrowserModule,

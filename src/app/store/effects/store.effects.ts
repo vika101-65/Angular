@@ -3,7 +3,7 @@ import { createEffect, ofType, Actions } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import {catchError, delay, map, switchMap} from 'rxjs/operators';
 // import { from, mergeMap, switchMap, catchError } from "rxjs";
-import { ApiService } from "src/app/servise/api-sevice";
+import { ApiService } from "src/app/service/api-sevice";
 // import { map } from 'rxjs/operators';
 import { errorAction, successGetDesRecipeAction, successGetRecipsAction } from '../action/store.action';
 
