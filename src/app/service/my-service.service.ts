@@ -1,22 +1,29 @@
-// import { HttpClient } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { catchError, Observable, of } from 'rxjs';
+import { throwError } from 'rxjs';
 
-// export interface User {
-//   name: string,
-//   email: string
-// }
+export interface User {
+  email: string,
+  password: string
+}
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class MyServiceService {
+@Injectable(
+  {
+  providedIn: 'root'
+  }
+)
+export class MyServiceService {
+  
+  errorMessage: String = "";
+  constructor(private http: HttpClient) { }
 
-//   constructor(private http: HttpClient) { }
+  url: string = 'http://localhost:5000/api/';
 
-//   url: string = 'http://localhost:5000/api/user';
-
-//   createUser(body: User) {
-//     this.http.post(this.url, body);
-//     console.log(body)
-//   }
-// }
+  createUser(body: User) {
+    return this.http.post(this.url + 'user/registration', body)
+    .pipe(catchError((err) => {
+      return of(err.error)
+    }))
+  }
+}

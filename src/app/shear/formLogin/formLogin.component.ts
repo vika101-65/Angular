@@ -1,34 +1,49 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ApiService } from 'src/app/service/api-sevice';
+import { Router } from '@angular/router';
+import { MyServiceService } from 'src/app/service/my-service.service';
 
 @Component({
   selector: 'app-my-link',
   templateUrl: './formLogin.component.html',
   styleUrls: ['./formLogin.component.css'],
-  providers: [ApiService]
+  providers: [MyServiceService]
 })
 export class FormLogin implements OnInit {
-  
-  constructor(private myService: ApiService,
-     private http: HttpClient
-     ) { }
+  href: string = "";
+  errorMessage: String = "";
+
+  constructor(private myService: MyServiceService,
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.href = this.router.url;
+    console.log(this.href);
   }
 
   save(form: NgForm) {
-    console.log(form);
-    console.log(form.value.mail);
-    // console.log(this.myService);
     const body = {
-      name: form.value.name,
-      email: form.value.mail
+      email: form.value.email,
+      password: form.value.password
     };
 
-    this.myService.createUser(body);
-    // this.http.post('http://localhost:5000/api/user', body).subscribe(res => console.log('post', res))
+    console.log(body);
+    if (this.href === '/registration') {
+      this.myService.createUser(body).subscribe(
+        res => {
+          console.log('res', res);
+          if (res.message) {
+            this.errorMessage = res.message;
+          }
+        }
+      );
+      form.reset();
+    }
+
+
   }
 
   // save(form: NgForm) {

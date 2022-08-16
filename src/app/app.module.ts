@@ -17,6 +17,7 @@ import { metaReducers, reducers } from './store/reduces/store.reduces';
 import { ResEffect } from './store/effects/store.effects';
 import { PaginationComponent } from './pagination/pagination.component';
 import { FormLogin } from './shear/formLogin/formLogin.component';
+import { RegistrationComponent } from './main/registration/registration.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { FormLogin } from './shear/formLogin/formLogin.component';
     ListOfRecipesComponent,
     PaginationComponent,
     FormLogin,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,

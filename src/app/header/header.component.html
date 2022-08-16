@@ -1,12 +1,25 @@
-<nav class="navbar navbar-expand-md" >
+<nav class="navbar navbar-expand-md">
   <div class="container-fluid header">
-   <img class="logo-header" src="../assets/logo.jpg" alt="logo">
+    <img class="logo-header" src="../assets/logo.jpg" alt="logo">
   </div>
 
   <app-recipe-saerch class="justify-content-center sercch-header"></app-recipe-saerch>
 
-  <a routerLink="/login">Login</a>     
-        <!-- <p>{{photos$ | async}}</p> -->
+  <div class="registration">
+    <a routerLink="/login">
+      <button type="button" class="btn btn-success">
+        Login
+      </button>
+    </a>
+
+    <a routerLink="/registration">
+      <button type="button" class="btn btn-success">
+        Registration
+      </button>
+    </a>
+  </div>
+
+  <!-- <p>{{photos$ | async}}</p> -->
 
   <!-- <div class="container-fluid" >
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -35,4 +48,3 @@
     </div>
   </div> -->
 </nav>
-

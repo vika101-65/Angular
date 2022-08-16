@@ -26,10 +26,10 @@ export class ApiService {
     return this.http.get(url)
   }
 
-  url: string = 'http://localhost:5000/api/user';
+  // url: string = 'http://localhost:5000/api/user';
 
-  createUser(body: any) {
-    this.http.post(this.url, body);
-    console.log(body)
-  }
+  // createUser(body: any) {
+  //   this.http.post(this.url, body);
+  //   console.log(body)
+  // }
 }

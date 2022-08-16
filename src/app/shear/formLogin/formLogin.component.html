@@ -1,11 +1,22 @@
-<h3>Form!</h3>
+<h3 class=" text-center">REGISTRATION</h3>
+<form (ngSubmit)="save(form)" #form="ngForm" class="form-login">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input name="email" ngModel type="email"
+      [ngClass]="{
+        'form-control':true,
+        'is-invalid': errorMessage? true: false
+      }" 
+      id="exampleInputEmail1" aria-describedby="emailHelp">
+    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+    <div id="validationServer03Feedback" class="invalid-feedback">
+     {{errorMessage}}
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input name="password" ngModel type="password" class="form-control" id="exampleInputPassword1">
+  </div>
 
-<form (ngSubmit)="save(form)" #form="ngForm">
-  <label>Your name</label>
-  <input name="name" ngModel>
-
-  <label>Your mail</label>
-  <input name="mail" ngModel>
-
-  <button type="submit"> Save</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
