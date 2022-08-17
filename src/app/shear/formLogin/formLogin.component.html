@@ -1,4 +1,4 @@
-<h3 class=" text-center">REGISTRATION</h3>
+<h3 class=" text-center">{{header}}</h3>
 <form (ngSubmit)="save(form)" #form="ngForm" class="form-login">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -7,7 +7,9 @@
         'form-control':true,
         'is-invalid': errorMessage? true: false
       }" 
-      id="exampleInputEmail1" aria-describedby="emailHelp">
+      id="exampleInputEmail1" aria-describedby="emailHelp"
+      (keyup)="checkForEmptinessEmail(form)"
+    >
     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
     <div id="validationServer03Feedback" class="invalid-feedback">
      {{errorMessage}}

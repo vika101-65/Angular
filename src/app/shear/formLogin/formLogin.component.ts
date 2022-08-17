@@ -13,6 +13,7 @@ import { MyServiceService } from 'src/app/service/my-service.service';
 export class FormLogin implements OnInit {
   href: string = "";
   errorMessage: String = "";
+  header?: String;
 
   constructor(private myService: MyServiceService,
     private http: HttpClient,
@@ -21,7 +22,7 @@ export class FormLogin implements OnInit {
 
   ngOnInit(): void {
     this.href = this.router.url;
-    console.log(this.href);
+     this.header = this.href.slice(1);
   }
 
   save(form: NgForm) {
@@ -30,7 +31,6 @@ export class FormLogin implements OnInit {
       password: form.value.password
     };
 
-    console.log(body);
     if (this.href === '/registration') {
       this.myService.createUser(body).subscribe(
         res => {
@@ -40,14 +40,22 @@ export class FormLogin implements OnInit {
           }
         }
       );
-      form.reset();
+    };
+
+    if (this.href === '/login') {
+      this.myService.loginUser(body).subscribe(
+        res => {
+          console.log('res', res);
+        }
+      )
     }
-
-
+    form.reset();
   }
 
-  // save(form: NgForm) {
-  //   console.log(form);
-  //   this.http.get('http://localhost:5000/api/users').subscribe(res => console.log('res', res))
-  // }
+  checkForEmptinessEmail(form: NgForm) {
+    console.log('checkForEmptinessEmail', form.value.email);
+    if(form.value.email) {
+      this.errorMessage = '';
+    }
+  }
 }
